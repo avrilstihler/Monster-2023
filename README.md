@@ -2,6 +2,9 @@
 
 > "Se apenas alguns podem ter, não é felicidade. Felicidade é algo que qualquer um pode ter."
 
+[![Captura-de-tela-2025-11-22-224244.png](https://i.postimg.cc/TYQSJhWR/Captura-de-tela-2025-11-22-224244.png)](https://postimg.cc/7fGmxHVc)
+Clique [aqui](https://avrilstihler.github.io/Monster-2023/) para visitar o site.
+
 Este projeto é uma **Landing Page tributo** ao filme *Monster* (2023), do aclamado diretor Kore-eda Hirokazu.
 
 ## 🎬 Sobre a Obra
