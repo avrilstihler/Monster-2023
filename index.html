@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monster (2023) | Kore-eda Hirokazu</title>
+    <style>
+        /* --- IMPORTAÇÃO DE FONTES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Inter:wght@300;400;500&display=swap');
+
+        /* --- VARIÁVEIS E RESET --- */
+        :root {
+            --bg-color: #f9f9f7; /* Off-white papel */
+            --text-main: #2b2b2b;
+            --text-light: #6e6e6e;
+            --accent: #2f4f4f; /* Dark Slate Gray - Lembra a floresta */
+            --highlight: #b22222; /* Vermelho escuro sutil para destaque */
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        img { width: 100%; display: block; object-fit: cover; }
+
+        /* --- UTILITÁRIOS --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- HERO SECTION --- */
+        header {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://i.postimg.cc/02yXQcMY/monster-banner-scaled.jpg'); /* Imagem placeholder de floresta */
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+
+        header h1 {
+            font-size: 6rem;
+            letter-spacing: 1rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            letter-spacing: 0.2rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+        }
+
+        .btn-hero {
+            padding: 15px 40px;
+            border: 1px solid rgba(255,255,255,0.6);
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.15rem;
+            transition: var(--transition);
+            background: transparent;
+        }
+
+        .btn-hero:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        /* --- SOBRE (PLOT) --- */
+        .about {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--accent);
+        }
+
+        .about p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* --- PERSPECTIVA / SIGNIFICADO --- */
+        .meaning {
+            background-color: #1a1a1a;
+            color: #ccc;
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .meaning-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .meaning-text h2 {
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.8rem;
+            border-left: 2px solid var(--highlight);
+            padding-left: 20px;
+            margin: 30px 0;
+            color: #fff;
+        }
+
+        /* --- PERSONAGENS --- */
+        .characters {
+            padding: 120px 0;
+        }
+
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .char-card {
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .char-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .char-img {
+            height: 350px;
+            width: 100%;
+            background-color: #e0e0e0;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Placeholders visuais para personagens com gradiente sutil */
+        .p-minato { background: url('https://i.postimg.cc/9MvgzqSp/66806-4.jpg'); background-size: cover; background-position: center; }
+        .p-hori { background: url('https://i.postimg.cc/1tRYLQFD/06-Monster-(2023).jpg'); background-size: cover; background-position: center;}
+        .p-saori { background: url('https://i.postimg.cc/qqDfm7DP/saori.jpg'); background-size: cover; background-position: center;}
+
+        .char-name {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            color: var(--accent);
+        }
+
+        .char-role {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            color: #999;
+        }
+
+        /* --- TRAILER & VISUALS --- */
+        .visuals {
+            padding-bottom: 100px;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            max-width: 1000px;
+            margin: 0 auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--bg-color);
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+
+        .music-credit {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+
+        .credits-small {
+            font-size: 0.8rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+        }
+
+        /* --- MEDIA QUERIES --- */
+        @media (max-width: 768px) {
+            header h1 { font-size: 3.5rem; letter-spacing: 0.5rem; }
+            .meaning-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="fade-in">
+            <h1>Monster</h1>
+            <p>UM FILME DE KORE-EDA HIROKAZU</p>
+            <a href="#trailer" class="btn-hero">Assistir Trailer</a>
+        </div>
+    </header>
+
+    <section class="about container">
+        <h2 class="section-title">O Mistério</h2>
+        <p>
+            Quando seu jovem filho Minato começa a se comportar de maneira estranha, sua mãe sente que há algo errado. Ao descobrir que um professor é o responsável, ela invade a escola exigindo saber o que está acontecendo. Mas à medida que a história se desenrola através dos olhos da mãe, do professor e da criança, a verdade se revela muito mais complexa.
+        </p>
+    </section>
+
+    <section class="meaning">
+        <div class="container meaning-grid">
+            <div class="meaning-text">
+                <h2>Quem é o Monstro?</h2>
+                <p>
+                    "Monster" não é sobre vilões, mas sobre a falibilidade da percepção humana. Utilizando uma estrutura narrativa fragmentada, o filme nos força a confrontar nossos próprios preconceitos. O que parece ser maldade sob um ângulo, revela-se como amor ou incompreensão sob outro.
+                </p>
+                <div class="quote">
+                    "Se apenas alguns podem ter, não é felicidade. Felicidade é algo que qualquer um pode ter."
+                </div>
+                <p style="margin-top: 20px; font-size: 0.9rem; color: #888;">
+                    Uma obra sobre inocência, renascimento e o peso das expectativas sociais.
+                </p>
+            </div>
+            <div class="meaning-img">
+                <img src="https://i.postimg.cc/ZKWP2gv6/KBW9777-scaled.webp" alt="Chuva na janela" style="border-radius: 2px; opacity: 0.8;">
+            </div>
+        </div>
+    </section>
+
+    <section class="characters container">
+        <h2 class="section-title" style="text-align: center;">As Perspectivas</h2>
+        <div class="char-grid">
+            <div class="char-card">
+                <div class="char-img p-saori"></div>
+                <h3 class="char-name">Saori Mugino</h3>
+                <p class="char-role">A Acusação</p>
+                <p style="font-size: 0.85rem; color: #777; margin-top: 10px; padding: 0 15px;">
+                    Uma mãe viúva que vê seu filho sofrendo e luta contra a aparente negligência e maldade da escola.
+                </p>
+            </div>
+            
+            <div class="char-card">
+                <div class="char-img p-hori"></div>
+                <h3 class="char-name">Michitoshi Hori</h3>
+                <p class="char-role">O Réu</p>
+                <p style="font-size: 0.85rem; color: #777; margin-top: 10px; padding: 0 15px;">
+                    Visto como agressor, sua perspectiva revela um homem desajeitado, mas inocente, vítima de rumores.
+                </p>
+            </div>
+
+            <div class="char-card">
+                <div class="char-img p-minato"></div>
+                <h3 class="char-name">Minato Mugino</h3>
+                <p class="char-role">A Realidade</p>
+                <p style="font-size: 0.85rem; color: #777; margin-top: 10px; padding: 0 15px;">
+                    A peça final do quebra-cabeça. Onde descobrimos que o silêncio escondia amizade, medo e amor.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="trailer" class="visuals container">
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/c85PhN9Hgwk?si=NoControls" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="music-credit">
+                Trilha sonora original por <strong>Ryuichi Sakamoto</strong>
+            </div>
+            
+            <div style="margin: 30px 0; font-size: 1rem; color: #555;">
+                Curadoria e desenvolvimento por <a href="https://github.com/avrilstihler" target="_blank" style="border-bottom: 1px solid #b22222; padding-bottom: 2px; transition: color 0.3s;">Avril Stihler</a>,
+                <br>
+                uma grande admiradora desta obra.
+            </div>
+
+            <div class="credits-small">
+                © 2023 Monster Film Partners. Gaga Corporation. Toho.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
